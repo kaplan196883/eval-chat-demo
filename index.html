@@ -1,0 +1,665 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Aussie Bathroom Renos | Sydney's #1 Bathroom Renovation Specialists</title>
+    <style>
+        /* ── Reset & Base ──────────────────────────────────────────── */
+        *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+        html { scroll-behavior: smooth; }
+        body {
+            font-family: 'Segoe UI', -apple-system, BlinkMacSystemFont, sans-serif;
+            color: #1e293b;
+            line-height: 1.6;
+            background: #fff;
+        }
+        img { max-width: 100%; display: block; }
+        a { color: inherit; text-decoration: none; }
+
+        /* ── Nav ───────────────────────────────────────────────────── */
+        .nav {
+            position: sticky; top: 0; z-index: 100;
+            background: #fff;
+            border-bottom: 1px solid #e2e8f0;
+            padding: 0 24px;
+        }
+        .nav__inner {
+            max-width: 1200px; margin: 0 auto;
+            display: flex; align-items: center; justify-content: space-between;
+            height: 64px;
+        }
+        .nav__logo {
+            font-size: 20px; font-weight: 800;
+            color: #0f766e;
+        }
+        .nav__logo span { color: #f59e0b; }
+        .nav__links { display: flex; gap: 28px; list-style: none; }
+        .nav__links a {
+            font-size: 14px; font-weight: 500; color: #475569;
+            transition: color 150ms;
+        }
+        .nav__links a:hover { color: #0f766e; }
+        .nav__cta {
+            background: #0f766e; color: #fff;
+            padding: 10px 22px; border-radius: 8px;
+            font-size: 14px; font-weight: 600;
+            transition: background 150ms;
+        }
+        .nav__cta:hover { background: #0d9488; }
+
+        /* ── Hero ──────────────────────────────────────────────────── */
+        .hero {
+            background: linear-gradient(135deg, #0f766e 0%, #0d9488 50%, #14b8a6 100%);
+            color: #fff;
+            padding: 80px 24px 100px;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+        .hero::after {
+            content: '';
+            position: absolute; bottom: -2px; left: 0; right: 0;
+            height: 60px;
+            background: #fff;
+            clip-path: ellipse(55% 100% at 50% 100%);
+        }
+        .hero__badge {
+            display: inline-block;
+            background: rgba(255,255,255,0.2);
+            padding: 6px 16px; border-radius: 20px;
+            font-size: 13px; font-weight: 600;
+            margin-bottom: 20px;
+            backdrop-filter: blur(4px);
+        }
+        .hero h1 {
+            font-size: clamp(32px, 5vw, 56px);
+            font-weight: 800;
+            line-height: 1.15;
+            max-width: 720px;
+            margin: 0 auto 16px;
+        }
+        .hero p {
+            font-size: 18px;
+            opacity: 0.9;
+            max-width: 560px;
+            margin: 0 auto 32px;
+        }
+        .hero__buttons { display: flex; gap: 12px; justify-content: center; flex-wrap: wrap; }
+        .btn {
+            display: inline-flex; align-items: center; gap: 8px;
+            padding: 14px 28px; border-radius: 10px;
+            font-size: 15px; font-weight: 600;
+            transition: all 150ms; border: none; cursor: pointer;
+        }
+        .btn--white { background: #fff; color: #0f766e; }
+        .btn--white:hover { background: #f0fdfa; transform: translateY(-1px); }
+        .btn--outline { background: transparent; color: #fff; border: 2px solid rgba(255,255,255,0.4); }
+        .btn--outline:hover { border-color: #fff; background: rgba(255,255,255,0.1); }
+
+        /* ── Stats bar ─────────────────────────────────────────────── */
+        .stats {
+            display: flex; justify-content: center; gap: 48px; flex-wrap: wrap;
+            padding: 40px 24px 48px;
+            max-width: 900px; margin: 0 auto;
+        }
+        .stat { text-align: center; }
+        .stat__num {
+            font-size: 36px; font-weight: 800; color: #0f766e;
+        }
+        .stat__label {
+            font-size: 14px; color: #64748b; margin-top: 2px;
+        }
+
+        /* ── Section common ────────────────────────────────────────── */
+        .section {
+            padding: 64px 24px;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+        .section--gray { background: #f8fafc; }
+        .section--gray .section { padding-top: 64px; padding-bottom: 64px; }
+        .section__tag {
+            display: inline-block;
+            background: #f0fdfa; color: #0f766e;
+            padding: 4px 12px; border-radius: 6px;
+            font-size: 12px; font-weight: 700;
+            text-transform: uppercase; letter-spacing: 0.05em;
+            margin-bottom: 12px;
+        }
+        .section__title {
+            font-size: 32px; font-weight: 800;
+            margin-bottom: 8px; color: #0f172a;
+        }
+        .section__sub {
+            font-size: 16px; color: #64748b;
+            max-width: 560px; margin-bottom: 40px;
+        }
+
+        /* ── Services grid ─────────────────────────────────────────── */
+        .services { display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap: 24px; }
+        .service-card {
+            background: #fff;
+            border: 1px solid #e2e8f0;
+            border-radius: 12px;
+            padding: 28px;
+            transition: box-shadow 200ms, transform 200ms;
+        }
+        .service-card:hover {
+            box-shadow: 0 8px 30px rgba(0,0,0,0.08);
+            transform: translateY(-3px);
+        }
+        .service-card__icon {
+            width: 48px; height: 48px;
+            background: #f0fdfa;
+            border-radius: 10px;
+            display: flex; align-items: center; justify-content: center;
+            font-size: 24px;
+            margin-bottom: 16px;
+        }
+        .service-card h3 {
+            font-size: 18px; font-weight: 700;
+            margin-bottom: 8px;
+        }
+        .service-card p {
+            font-size: 14px; color: #64748b; line-height: 1.6;
+        }
+        .service-card__price {
+            display: inline-block;
+            margin-top: 12px;
+            font-size: 13px; font-weight: 700;
+            color: #0f766e;
+            background: #f0fdfa;
+            padding: 4px 10px;
+            border-radius: 6px;
+        }
+
+        /* ── Process ───────────────────────────────────────────────── */
+        .process { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 32px; counter-reset: step; }
+        .process__step { position: relative; text-align: center; }
+        .process__step::before {
+            counter-increment: step;
+            content: counter(step);
+            display: flex; align-items: center; justify-content: center;
+            width: 48px; height: 48px;
+            background: #0f766e; color: #fff;
+            border-radius: 50%;
+            font-size: 18px; font-weight: 800;
+            margin: 0 auto 14px;
+        }
+        .process__step h4 {
+            font-size: 16px; font-weight: 700;
+            margin-bottom: 6px;
+        }
+        .process__step p {
+            font-size: 13px; color: #64748b;
+        }
+
+        /* ── Testimonials ──────────────────────────────────────────── */
+        .testimonials { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 24px; }
+        .testimonial {
+            background: #fff;
+            border: 1px solid #e2e8f0;
+            border-radius: 12px;
+            padding: 28px;
+        }
+        .testimonial__stars { color: #f59e0b; font-size: 16px; margin-bottom: 12px; }
+        .testimonial__text {
+            font-size: 15px; color: #334155;
+            line-height: 1.7; margin-bottom: 16px;
+            font-style: italic;
+        }
+        .testimonial__author {
+            display: flex; align-items: center; gap: 12px;
+        }
+        .testimonial__avatar {
+            width: 40px; height: 40px; border-radius: 50%;
+            background: #e2e8f0;
+            display: flex; align-items: center; justify-content: center;
+            font-weight: 700; font-size: 16px; color: #0f766e;
+        }
+        .testimonial__name { font-size: 14px; font-weight: 600; }
+        .testimonial__loc { font-size: 12px; color: #94a3b8; }
+
+        /* ── Gallery ───────────────────────────────────────────────── */
+        .gallery {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 16px;
+        }
+        .gallery__item {
+            border-radius: 12px;
+            overflow: hidden;
+            aspect-ratio: 4/3;
+            background: linear-gradient(135deg, #e2e8f0, #cbd5e1);
+            position: relative;
+            display: flex; align-items: center; justify-content: center;
+        }
+        .gallery__item span {
+            background: rgba(0,0,0,0.5); color: #fff;
+            padding: 6px 14px; border-radius: 6px;
+            font-size: 13px; font-weight: 600;
+        }
+
+        /* ── Pricing ───────────────────────────────────────────────── */
+        .pricing { display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap: 24px; }
+        .price-card {
+            border: 1px solid #e2e8f0;
+            border-radius: 12px;
+            padding: 32px 28px;
+            text-align: center;
+            position: relative;
+            background: #fff;
+        }
+        .price-card--featured {
+            border-color: #0f766e;
+            box-shadow: 0 8px 30px rgba(15,118,110,0.12);
+        }
+        .price-card--featured::before {
+            content: 'Most Popular';
+            position: absolute; top: -12px; left: 50%; transform: translateX(-50%);
+            background: #0f766e; color: #fff;
+            padding: 4px 14px; border-radius: 6px;
+            font-size: 11px; font-weight: 700; text-transform: uppercase;
+        }
+        .price-card__name {
+            font-size: 18px; font-weight: 700;
+            margin-bottom: 4px;
+        }
+        .price-card__desc {
+            font-size: 13px; color: #64748b;
+            margin-bottom: 16px;
+        }
+        .price-card__amount {
+            font-size: 40px; font-weight: 800;
+            color: #0f766e; margin-bottom: 4px;
+        }
+        .price-card__amount span { font-size: 16px; font-weight: 500; color: #94a3b8; }
+        .price-card__note {
+            font-size: 12px; color: #94a3b8;
+            margin-bottom: 20px;
+        }
+        .price-card__features {
+            list-style: none;
+            text-align: left;
+            margin-bottom: 24px;
+        }
+        .price-card__features li {
+            padding: 6px 0;
+            font-size: 14px; color: #475569;
+            display: flex; align-items: center; gap: 8px;
+        }
+        .price-card__features li::before {
+            content: '\2713';
+            color: #0f766e; font-weight: 700;
+        }
+        .price-card .btn {
+            width: 100%;
+            justify-content: center;
+            background: #0f766e; color: #fff;
+        }
+        .price-card .btn:hover { background: #0d9488; }
+        .price-card--featured .btn { background: #0f766e; }
+
+        /* ── CTA banner ────────────────────────────────────────────── */
+        .cta-banner {
+            background: linear-gradient(135deg, #0f766e, #14b8a6);
+            color: #fff;
+            text-align: center;
+            padding: 64px 24px;
+            border-radius: 16px;
+            max-width: 1200px;
+            margin: 0 auto 64px;
+        }
+        .cta-banner h2 {
+            font-size: 32px; font-weight: 800;
+            margin-bottom: 12px;
+        }
+        .cta-banner p {
+            font-size: 16px; opacity: 0.9;
+            max-width: 480px; margin: 0 auto 28px;
+        }
+
+        /* ── Footer ────────────────────────────────────────────────── */
+        .footer {
+            background: #0f172a;
+            color: #94a3b8;
+            padding: 48px 24px 24px;
+        }
+        .footer__inner {
+            max-width: 1200px; margin: 0 auto;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 32px;
+        }
+        .footer__col h4 {
+            color: #e2e8f0; font-size: 14px;
+            margin-bottom: 14px;
+        }
+        .footer__col p, .footer__col a {
+            font-size: 13px; line-height: 2;
+            display: block; color: #94a3b8;
+        }
+        .footer__col a:hover { color: #e2e8f0; }
+        .footer__bottom {
+            max-width: 1200px; margin: 32px auto 0;
+            padding-top: 20px;
+            border-top: 1px solid #1e293b;
+            text-align: center;
+            font-size: 12px;
+        }
+
+        /* ── Responsive ────────────────────────────────────────────── */
+        @media (max-width: 768px) {
+            .nav__links { display: none; }
+            .hero { padding: 56px 20px 80px; }
+            .stats { gap: 24px; }
+            .section { padding: 48px 20px; }
+        }
+    </style>
+</head>
+<body>
+
+<!-- Nav -->
+<nav class="nav">
+    <div class="nav__inner">
+        <div class="nav__logo">Aussie<span>Renos</span></div>
+        <ul class="nav__links">
+            <li><a href="#services">Services</a></li>
+            <li><a href="#gallery">Gallery</a></li>
+            <li><a href="#pricing">Pricing</a></li>
+            <li><a href="#reviews">Reviews</a></li>
+        </ul>
+        <a href="#pricing" class="nav__cta">Get Free Quote</a>
+    </div>
+</nav>
+
+<!-- Hero -->
+<section class="hero">
+    <div class="hero__badge">Trusted by 2,400+ Sydney homeowners</div>
+    <h1>Bathroom Renovations Done Right</h1>
+    <p>From tired tiles to dream bathrooms. Licensed, insured, and backed by our 10-year workmanship guarantee. Serving all of Greater Sydney.</p>
+    <div class="hero__buttons">
+        <a href="#pricing" class="btn btn--white">See Our Packages</a>
+        <button class="btn btn--outline" onclick="ClawChat.open()">Chat With Us</button>
+    </div>
+</section>
+
+<!-- Stats -->
+<div class="stats">
+    <div class="stat">
+        <div class="stat__num">2,400+</div>
+        <div class="stat__label">Bathrooms Completed</div>
+    </div>
+    <div class="stat">
+        <div class="stat__num">4.9</div>
+        <div class="stat__label">Google Rating</div>
+    </div>
+    <div class="stat">
+        <div class="stat__num">12</div>
+        <div class="stat__label">Years Experience</div>
+    </div>
+    <div class="stat">
+        <div class="stat__num">10yr</div>
+        <div class="stat__label">Workmanship Guarantee</div>
+    </div>
+</div>
+
+<!-- Services -->
+<div class="section--gray">
+<section class="section" id="services">
+    <div class="section__tag">What We Do</div>
+    <h2 class="section__title">Our Services</h2>
+    <p class="section__sub">Full-service bathroom renovations — we handle everything from demolition to the final coat of paint.</p>
+    <div class="services">
+        <div class="service-card">
+            <div class="service-card__icon">&#x1f6bf;</div>
+            <h3>Complete Bathroom Reno</h3>
+            <p>Full strip-out and rebuild. New waterproofing, tiling, plumbing, electrical, vanity, shower screen, and fixtures. Turnkey solution.</p>
+            <div class="service-card__price">From $18,500</div>
+        </div>
+        <div class="service-card">
+            <div class="service-card__icon">&#x1f6c1;</div>
+            <h3>Bath-to-Shower Conversion</h3>
+            <p>Remove your old bathtub and replace with a modern walk-in shower. Perfect for accessibility or creating more space.</p>
+            <div class="service-card__price">From $8,900</div>
+        </div>
+        <div class="service-card">
+            <div class="service-card__icon">&#x1fa9e;</div>
+            <h3>Re-Tile & Waterproofing</h3>
+            <p>Strip existing tiles, repair substrate, apply certified waterproof membrane, and install new floor and wall tiles.</p>
+            <div class="service-card__price">From $6,200</div>
+        </div>
+        <div class="service-card">
+            <div class="service-card__icon">&#x1f6bd;</div>
+            <h3>Ensuite & Powder Room</h3>
+            <p>Small space specialists. We maximise every square metre with clever layouts, wall-hung vanities, and frameless screens.</p>
+            <div class="service-card__price">From $12,500</div>
+        </div>
+        <div class="service-card">
+            <div class="service-card__icon">&#x267f;</div>
+            <h3>Accessible Bathrooms</h3>
+            <p>NDIS-compliant modifications: grab rails, hobless showers, non-slip tiling, fold-down seats, and wider doorways.</p>
+            <div class="service-card__price">From $14,000</div>
+        </div>
+        <div class="service-card">
+            <div class="service-card__icon">&#x1f527;</div>
+            <h3>Plumbing & Repairs</h3>
+            <p>Leaking shower base? Cracked tiles? Dripping taps? We fix bathroom plumbing issues of all sizes. Same-week service.</p>
+            <div class="service-card__price">From $350</div>
+        </div>
+    </div>
+</section>
+</div>
+
+<!-- Process -->
+<section class="section">
+    <div class="section__tag">How It Works</div>
+    <h2 class="section__title">Four Simple Steps</h2>
+    <p class="section__sub">We make bathroom renovations stress-free from start to finish.</p>
+    <div class="process">
+        <div class="process__step">
+            <h4>Free Consultation</h4>
+            <p>We visit your home, measure up, discuss your vision, and provide a detailed written quote — no obligation.</p>
+        </div>
+        <div class="process__step">
+            <h4>Design & Selection</h4>
+            <p>Choose tiles, fixtures, and fittings with help from our design consultant. We source everything for you.</p>
+        </div>
+        <div class="process__step">
+            <h4>Build & Install</h4>
+            <p>Our licensed team completes the full renovation. Most standard bathrooms are done in 10-14 working days.</p>
+        </div>
+        <div class="process__step">
+            <h4>Final Walkthrough</h4>
+            <p>We do a detailed inspection with you. You only sign off when you're 100% happy. Then enjoy your new bathroom!</p>
+        </div>
+    </div>
+</section>
+
+<!-- Gallery -->
+<div class="section--gray">
+<section class="section" id="gallery">
+    <div class="section__tag">Our Work</div>
+    <h2 class="section__title">Recent Projects</h2>
+    <p class="section__sub">A few of our favourite transformations from across Sydney.</p>
+    <div class="gallery">
+        <div class="gallery__item" style="background: linear-gradient(135deg, #a7c7c8, #6b9b9e);">
+            <span>Mosman — Full Reno</span>
+        </div>
+        <div class="gallery__item" style="background: linear-gradient(135deg, #c4b8a5, #9e8e78);">
+            <span>Bondi — Ensuite</span>
+        </div>
+        <div class="gallery__item" style="background: linear-gradient(135deg, #b0c4d8, #7a9bb5);">
+            <span>Manly — Coastal Theme</span>
+        </div>
+        <div class="gallery__item" style="background: linear-gradient(135deg, #d4c5b3, #b0a08a);">
+            <span>Surry Hills — Heritage</span>
+        </div>
+        <div class="gallery__item" style="background: linear-gradient(135deg, #bfc9c2, #8ea898);">
+            <span>Parramatta — Accessible</span>
+        </div>
+        <div class="gallery__item" style="background: linear-gradient(135deg, #c2b8d0, #9686ab);">
+            <span>Newtown — Modern Compact</span>
+        </div>
+    </div>
+</section>
+</div>
+
+<!-- Pricing -->
+<section class="section" id="pricing">
+    <div class="section__tag">Pricing</div>
+    <h2 class="section__title">Renovation Packages</h2>
+    <p class="section__sub">Transparent, fixed-price packages. No hidden costs, no surprises.</p>
+    <div class="pricing">
+        <div class="price-card">
+            <div class="price-card__name">Refresh</div>
+            <div class="price-card__desc">Budget-friendly facelift</div>
+            <div class="price-card__amount">$12,900 <span>inc GST</span></div>
+            <div class="price-card__note">Standard bathroom up to 5m&sup2;</div>
+            <ul class="price-card__features">
+                <li>Remove existing tiles</li>
+                <li>New waterproofing (certified)</li>
+                <li>Floor & wall tiling</li>
+                <li>New tapware & showerhead</li>
+                <li>Paint ceiling & trims</li>
+                <li>5-year workmanship guarantee</li>
+            </ul>
+            <a href="#" class="btn">Get Quote</a>
+        </div>
+        <div class="price-card price-card--featured">
+            <div class="price-card__name">Complete</div>
+            <div class="price-card__desc">Full renovation, new everything</div>
+            <div class="price-card__amount">$22,500 <span>inc GST</span></div>
+            <div class="price-card__note">Standard bathroom up to 6m&sup2;</div>
+            <ul class="price-card__features">
+                <li>Full strip-out & demolition</li>
+                <li>Waterproofing & tiling</li>
+                <li>New vanity, toilet & mirror</li>
+                <li>Frameless shower screen</li>
+                <li>All plumbing & electrical</li>
+                <li>10-year workmanship guarantee</li>
+            </ul>
+            <a href="#" class="btn">Get Quote</a>
+        </div>
+        <div class="price-card">
+            <div class="price-card__name">Luxury</div>
+            <div class="price-card__desc">Premium finishes & custom design</div>
+            <div class="price-card__amount">$35,000+ <span>inc GST</span></div>
+            <div class="price-card__note">Any size, bespoke design</div>
+            <ul class="price-card__features">
+                <li>Everything in Complete</li>
+                <li>Designer tile & stone selection</li>
+                <li>Freestanding bath or rain shower</li>
+                <li>Heated towel rails & floor</li>
+                <li>LED mirror cabinet & niches</li>
+                <li>Lifetime workmanship guarantee</li>
+            </ul>
+            <a href="#" class="btn">Get Quote</a>
+        </div>
+    </div>
+</section>
+
+<!-- Reviews -->
+<div class="section--gray">
+<section class="section" id="reviews">
+    <div class="section__tag">Reviews</div>
+    <h2 class="section__title">What Our Customers Say</h2>
+    <p class="section__sub">Don't just take our word for it.</p>
+    <div class="testimonials">
+        <div class="testimonial">
+            <div class="testimonial__stars">&#9733;&#9733;&#9733;&#9733;&#9733;</div>
+            <p class="testimonial__text">"Absolutely stoked with our new bathroom. The boys were on time every day, kept the site clean, and the tiling is flawless. Can't recommend Aussie Renos enough!"</p>
+            <div class="testimonial__author">
+                <div class="testimonial__avatar">SM</div>
+                <div>
+                    <div class="testimonial__name">Sarah M.</div>
+                    <div class="testimonial__loc">Mosman, NSW</div>
+                </div>
+            </div>
+        </div>
+        <div class="testimonial">
+            <div class="testimonial__stars">&#9733;&#9733;&#9733;&#9733;&#9733;</div>
+            <p class="testimonial__text">"We needed an accessible bathroom for Mum and they made the whole process painless. NDIS paperwork sorted, beautiful result, and finished ahead of schedule. Legends."</p>
+            <div class="testimonial__author">
+                <div class="testimonial__avatar">JT</div>
+                <div>
+                    <div class="testimonial__name">James T.</div>
+                    <div class="testimonial__loc">Parramatta, NSW</div>
+                </div>
+            </div>
+        </div>
+        <div class="testimonial">
+            <div class="testimonial__stars">&#9733;&#9733;&#9733;&#9733;&#9733;</div>
+            <p class="testimonial__text">"Third bathroom reno I've done and by far the best experience. Fixed price meant no budget blowout, and the quality of the waterproofing and tiling is top-notch. Will use again for the ensuite."</p>
+            <div class="testimonial__author">
+                <div class="testimonial__avatar">KL</div>
+                <div>
+                    <div class="testimonial__name">Karen L.</div>
+                    <div class="testimonial__loc">Bondi, NSW</div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+</div>
+
+<!-- CTA Banner -->
+<section class="section">
+    <div class="cta-banner">
+        <h2>Ready to Transform Your Bathroom?</h2>
+        <p>Book a free in-home consultation or chat with us right now to get started.</p>
+        <div class="hero__buttons">
+            <a href="tel:+61291234567" class="btn btn--white">Call (02) 9123 4567</a>
+            <button class="btn btn--outline" onclick="ClawChat.open()">Chat Now</button>
+        </div>
+    </div>
+</section>
+
+<!-- Footer -->
+<footer class="footer">
+    <div class="footer__inner">
+        <div class="footer__col">
+            <h4>Aussie Bathroom Renos</h4>
+            <p>Sydney's trusted bathroom renovation specialists since 2014. Licensed builder #384729. Fully insured.</p>
+        </div>
+        <div class="footer__col">
+            <h4>Services</h4>
+            <a href="#services">Complete Renovations</a>
+            <a href="#services">Bath-to-Shower</a>
+            <a href="#services">Re-Tile & Waterproofing</a>
+            <a href="#services">Accessible Bathrooms</a>
+        </div>
+        <div class="footer__col">
+            <h4>Service Areas</h4>
+            <p>Sydney CBD &middot; Eastern Suburbs<br>
+            North Shore &middot; Northern Beaches<br>
+            Inner West &middot; Western Sydney<br>
+            Sutherland Shire &middot; Hills District</p>
+        </div>
+        <div class="footer__col">
+            <h4>Contact</h4>
+            <a href="tel:+61291234567">(02) 9123 4567</a>
+            <a href="mailto:info@aussierenos.com.au">info@aussierenos.com.au</a>
+            <p>42 Renovation Lane<br>Surry Hills NSW 2010</p>
+        </div>
+    </div>
+    <div class="footer__bottom">
+        &copy; 2026 Aussie Bathroom Renos Pty Ltd. ABN 12 345 678 901. All rights reserved.
+    </div>
+</footer>
+
+<!-- Claw Chat Widget -->
+<script src="https://coworker.norepl.ai/widget/claw-chat.js"
+        data-gateway="https://coworker.norepl.ai"
+        data-theme="light"
+        data-title="Aussie Renos Chat"
+        data-accent="#0f766e"
+        data-bg-user="#0f766e"
+        data-welcome="G'day! Got questions about bathroom renovations? Ask us anything — pricing, timelines, or book a free quote."
+        data-bubble-size="60"
+        data-radius="14">
+</script>
+
+</body>
+</html>
